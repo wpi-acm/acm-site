@@ -1,0 +1,72 @@
+{% extends 'bootstrap-base.html' %}
+
+{% block html_attribs %} lang="en"{% endblock %}
+
+{% block title %}{% if title %}{{ title }} - WPI ACM{% else %}WPI Association for Computing Machinery{%endif %}{% endblock %}
+
+{% block head %}
+{{super()}}
+
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar mb-4 navbar-expand-lg">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                                     data-bs-target="#navbarSupportedContent"
+                                                     aria-controls="navbarSupportedContent"
+                                                     aria-expanded="true"
+                                                     aria-label="Toggle
+                                                                  navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('main.homepage') }}">
+                <img src="{{url_for('static', filename='img/logo.png')}}"
+                     alt="Logo" width="35" height="35" class="d-inline-block
+                                       align-text-middle mx-2">WPI ACM</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
+                {{ render_nav_item('main.homepage', 'Home')}}
+                {{ render_nav_item('main.homepage', 'Events')}}
+                {{ render_nav_item('main.homepage', 'Join Us!')}}
+            </ul>
+            <ul class="nav navbar-nav">
+                {% if current_user.is_authenticated %}
+                    {{ render_nav_item('main.homepage', 'Dashboard') }}
+                    {% if current_user.is_admin %}
+                        {{ render_nav_item('main.homepage', 'Admin Dash') }}
+                    {% endif %}  
+                    {{ render_nav_item('auth.logout', 'Logout') }}
+                {% else %}
+                    {{ render_nav_item('auth.login', 'Login with WPI') }}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block header %}
+<div id="baseCarousel" class="carousel slide" data-bs-ride="ride">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#baseCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#baseCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock header %}
+{% endblock %}
