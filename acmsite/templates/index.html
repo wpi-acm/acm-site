@@ -1,5 +1,33 @@
 {% extends 'layout.html' %}
 
 {% block app_content %}
+<div class="row mt-5 ms-1">
+    <div class="col text-center">
+        <img src="{{ url_for('static', filename='img/logo.png')}}">
+    </div>
+    <div class="col text-left">
+        <h3>Association for Computing Machinery @ WPI</h3>
+        <span><i>WPI's Professional Society for computer scientists, software
+                designers, Developers, coders, makers...</i></span>
+</div>
+<div class="row mt-5">
+    <h1>Welcome to ACM!</h1> 
+    <p>We're the student chapter of the <a href="https://acm.org">Association
+        for Computing Machinery</a> on campus. We host workshops, social events,
+    and WPI's annual <a href="https://hack.wpi.edu">hackathon</a> in C term.</p>
+</div>
+<div class="row">
+    <p>We also support WPI's linux community with our <a
+                                                              href="https://mirrors.acm.wpi.edu">mirrors</a>.
+                                                          Currently, we provide
+                                                          mirrors for:</p>
+    <ul class="ms-5">
+        <li>Debian</li>
+        <li>Arch Linux</li>
+        <li>OpenSUSE</li>
+    </ul>
 
+    <p>If you would like a package mirror for your linux distribution, please
+    reach out! Space is limited, but we want to support the community.</p>
+</div>
 {% endblock app_content %}

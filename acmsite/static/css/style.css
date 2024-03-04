@@ -1,0 +1,8 @@
+.carousel-item {
+    height: 100rem;
+}
+.header-image {
+    height: 15rem;
+    object-position: 0 75%;
+    object-fit: cover;
+}

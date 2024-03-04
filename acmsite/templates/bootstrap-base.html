@@ -16,11 +16,14 @@
         {% block styles %}
             <!-- Bootstrap CSS -->
             {{ bootstrap.load_css() }}
+            <link rel="stylesheet" href="{{ url_for('static',
+                                         filename='css/style.css') }}"
         {% endblock %}
 
         {% endblock %}
     </head>
-    <body>
+    <body style="background-color: #0182ac;">
+        <div class="container rounded aligh-middle p-1 mt-5" style="background-color: #ffffff; height: 100%;">
         <!-- Your page content -->
         {% block navbar %}{% endblock %}
 
@@ -38,6 +41,7 @@
             <!-- Optional JavaScript -->
             {{ bootstrap.load_js() }}
         {% endblock %}
+        </div>
     </body>
 </html>
 
