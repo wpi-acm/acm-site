@@ -34,9 +34,9 @@
             </ul>
             <ul class="nav navbar-nav">
                 {% if current_user.is_authenticated %}
-                    {{ render_nav_item('main.homepage', 'Dashboard') }}
+                    {{ render_nav_item('dashboard.home', 'Dashboard') }}
                     {% if current_user.is_admin %}
-                        {{ render_nav_item('main.homepage', 'Admin Dash') }}
+                        {{ render_nav_item('dashboard.home', 'Admin Dash') }}
                     {% endif %}  
                     {{ render_nav_item('auth.logout', 'Logout') }}
                 {% else %}

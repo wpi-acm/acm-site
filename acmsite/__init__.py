@@ -45,5 +45,8 @@ def create_app():
     from .auth import bp as auth_bp
     app.register_blueprint(auth_bp)
 
+    from .dashboard import bp as dash_bp
+    app.register_blueprint(dash_bp)
+
 
     return app

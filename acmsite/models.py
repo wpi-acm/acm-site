@@ -29,3 +29,12 @@ class PwResetRequest(db.Model):
     id = Column(String, primary_key=True)
     user_id = Column(String, ForeignKey('acm_users.id'), nullable=False)
     expires = Column(DateTime, nullable=False)
+
+class Event(db.Model):
+    __tablename__ = "acm_events"
+    id = Column(String, primary_key=True)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=True)
+    location = Column(String, nullable=False)
+    start_time=Column(DateTime, nullable=False)
+    end_time=Column(DateTime, nullable=False)
