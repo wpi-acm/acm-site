@@ -1,0 +1,28 @@
+{% extends "admin/admin-layout.html" %}
+
+{% block app_content %}
+<h1>Member List</h1> 
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Created</th>
+            <th>Last Login</th>
+            <th>Officer?</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for u in u_list %}
+            <tr>
+                <td>{{ u.email }}</td>
+                <td>{{ u.first_name }} {{ u.last_name }}</td>
+                <td>{{ u.created }}</td>
+                <td>{{ u.last_login }}</td>
+                <td>{{ u.is_admin }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    
+</table>
+{% endblock app_content %}

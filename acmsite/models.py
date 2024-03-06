@@ -38,3 +38,13 @@ class Event(db.Model):
     location = Column(String, nullable=False)
     start_time=Column(DateTime, nullable=False)
     end_time=Column(DateTime, nullable=False)
+
+    def create_json(self):
+        return {
+                "id": self.id,
+                "name": self.name,
+                "description": self.description,
+                "location": self.location,
+                "start_time": self.start_time.isoformat(),
+                "end_time": self.end_time.isoformat(),
+                }
