@@ -171,24 +171,34 @@
             $.get(`/admin/event/${id}`, (data) => {
                 console.log(data)
                 if (data.status == "error") {
-                    is_new = "yes"
+                    // This is a new event, do nothing!
                 } else {
                     name = data.name,
                     description = data.description,
                     loc = data.location
 
-                    start = new Date(data.start_time)
-                    start_day = start.toLocaleDateString()
+                    start = new Date(data.start_time) 
+
+                    var day = ("0" + start.getDate()).slice(-2);
+                    var month = ("0" + (start.getMonth() + 1)).slice(-2);
+
+                    start_day = start.getFullYear()+"-"+(month)+"-"+(day);
                     console.log(start_day)
                     start_time = start.toLocaleTimeString()
+                    console.log(start_time)
                     end = new Date(data.end_time)
-                    end_day = end.toLocaleDateString()
-                    end_time = end.toLocaleTimeString()
+
+                    var day = ("0" + end.getDate()).slice(-2);
+                    var month = ("0" + (end.getMonth() + 1)).slice(-2);
+
+                    end_day = end.getFullYear()+"-"+(month)+"-"+(day); 
+                    end_time = `${end.getHours()}:${end.getMinutes()}`
                 }
 
                     modal.find('#name').val(name)
                     modal.find('#location').val(loc)
                     modal.find('#description').val(description)
+                    console.log(start_day)
                     modal.find('#start_day').val(start_day)
                     modal.find('#start_time').val(start_time)
                     modal.find('#end_day').val(end_day)

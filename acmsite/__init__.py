@@ -5,6 +5,8 @@ from flask_login import LoginManager
 from flask_bootstrap import Bootstrap5
 from flask_fontawesome import FontAwesome
 
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 from authlib.integrations.flask_client import OAuth
 
 db = SQLAlchemy()
@@ -16,6 +18,8 @@ oauth = OAuth()
 
 def create_app():
     app = Flask(__name__)
+
+    app.wsgi_app = ProxyFix(app.wsgi_app)
 
     app.config.from_pyfile('config.py')
 

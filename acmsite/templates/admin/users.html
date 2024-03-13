@@ -10,6 +10,7 @@
             <th>Created</th>
             <th>Last Login</th>
             <th>Officer?</th>
+            <th>Options</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,22 @@
                 <td>{{ u.created }}</td>
                 <td>{{ u.last_login }}</td>
                 <td>{{ u.is_admin }}</td>
+                <td>
+                    <div class="dropdown">
+                       <a href="#" class="btn btn-primary dropdown-toggle"
+                                   data-bs-toggle="dropdown"><span
+                                   class="caret"></span></a>
+                       <ul class="dropdown-menu">
+                           {% if u.is_admin %}
+                           <li class="dropdown-item">Demote Officer</li>                           
+                           {% else %}
+                           <li class="dropdown-item">Promote Officer</li>
+                           {% endif %}
+                           <li class="dropdown-item">View Event Checkins</li>
+                           <li class="dropdown-item">Delete Member</li>
+                       </ul>
+                    </div>
+                </td>
             </tr>
         {% endfor %}
     </tbody>
