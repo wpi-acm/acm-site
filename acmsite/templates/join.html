@@ -2,10 +2,22 @@
 
 {% block app_content %}
 
-<h1>Join ACM</h1>
+<h1>Join ACM!</h1>
 
-<p>Want to join us? Show up to our GBMs and events every week!</p>
+<p>Want to join us? Show up to our <a href="{{ url_for('main.events')}}">GBMs and
+                                                                      events</a>
+every week!</p>
 
-<p>Our upcoming events are:</p>
+<p>You can also connect with us online, use these links to find us!</p>
 
+<ul>
+    <li>Discord: <a
+                         href="https://discord.gg/znvNGgDb6n">https://discord.gg/znvNGgDb6n</a></li>    
+    <li>Instagram: <a href="https://instagram.com/wpi_acm">@wpi_acm</a></li>
+    <li>MyWPI: <a
+                       href="https://mywpi.wpi.edu/ACM/club_signup">https://mywpi.wpi.edu/ACM/club_signup</a></li>
+    <li>Mailing List: <a
+            href="mailto:acm@wpi.edu?subject=Please%20add%20me%20to%20the%20ACM%20list!&body=Hello!%0A%0AI'd%20like%20to%20be%20added%20to%20the%20ACM%20email%20list%20(acm-announce%40wpi.edu).%0A%0AThanks!">Use
+        this fancy link</a>, or email acm@wpi.edu!</li>
+</ul>
 {% endblock %}
