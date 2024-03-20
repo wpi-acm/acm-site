@@ -1,7 +1,19 @@
 {% extends 'layout.html' %}
+{% from 'bootstrap5/table.html' import render_table %}
 
 {% block app_content %}
 
 We're still working on this! Check back later.
 
+<hr>
+
+{% if events == [] %}
+<p>No upcoming events. If it's a break, enjoy your break!</p>
+{% else %}
+{% for e in events %}
+<h4>{{ e.name }}</h4>
+<small style="font-style: italic; color: grey; margin-bottom: 1rem;">{{ e.start_time }} - {{ e.end_time }} &#45 {{ e.location }}</small>
+<p>{{ e.description }}</p>
+{% endfor %}
+{% endif %}
 {% endblock %}
