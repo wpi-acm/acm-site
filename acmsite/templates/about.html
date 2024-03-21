@@ -1,0 +1,160 @@
+{% extends "layout.html" %}
+
+{% block app_content %}
+
+<h1>About ACM</h1>
+
+<h4>tl;dr</h4>
+<p>We a group of computer science enthusiasts that meets every week to plan fun
+events like programming competitions, networking dinners and programming
+language labs. If you’re interested in joining, stop by our meetings! We are
+very friendly. Meeting info is on the homepage.</p>
+
+<h4>Exec Board</h4>
+<!-- TODO: Make this dynamic -- create officers table? <22-03-24, Cara> -->
+<div class="row">
+   <div class="col"> 
+       <div class="card">
+           <img class="card-img-top" src="{{ url_for('static',
+                                          filename='img/officers/avenat.png')
+                                          }}" alt="President"> 
+           <div class="card-body">
+                <h5 class="card-title">President</h5> 
+           </div>
+       </div>
+   </div> 
+   <div class="col"> 
+       <div class="card">
+           <img class="card-img-top" src="{{ url_for('static',
+                                          filename='img/officers/nitty.png')
+                                          }}" alt="Vice President"> 
+           <div class="card-body">
+                <h5 class="card-title">Vice President</h5> 
+           </div>
+       </div>
+   </div> 
+   <div class="col"> 
+       <div class="card">
+           <img class="card-img-top" src="{{ url_for('static',
+                                          filename='img/officers/ajhenbest.png')
+                                          }}" alt="Treasurer"> 
+           <div class="card-body">
+                <h5 class="card-title">Treasurer</h5> 
+           </div>
+       </div>
+   </div> 
+</div>
+<div class="row">
+   <div class="col"> 
+       <div class="card">
+           <img class="card-img-top" src="{{ url_for('static',
+                                          filename='img/officers/gdshiu.png')
+                                          }}" alt="Secretary"> 
+           <div class="card-body">
+                <h5 class="card-title">Secretary</h5> 
+           </div>
+       </div>
+   </div> 
+   <div class="col"> 
+       <div class="card">
+           <img class="card-img-top" src="{{ url_for('static',
+                                          filename='img/officers/gcampbell2.png')
+                                          }}" alt="PR Chair"> 
+           <div class="card-body">
+                <h5 class="card-title">PR Chair</h5> 
+           </div>
+       </div>
+   </div> 
+   <div class="col"> 
+       <div class="card">
+           <img class="card-img-top" src="{{ url_for('static',
+                                          filename='img/officers/mdidenko.png')
+                                          }}" alt="Events Coordinator"> 
+           <div class="card-body">
+                <h5 class="card-title">Events Coordinator</h5> 
+           </div>
+       </div>
+   </div>  
+</div>
+
+<div class="row">
+   <div class="col"> 
+       <div class="card">
+           <img class="card-img-top" src="{{ url_for('static',
+                                          filename='img/officers/djreynolds1.png')
+                                          }}" alt="Hackathon Manager"> 
+           <div class="card-body">
+                <h5 class="card-title">Hackathon Manager</h5> 
+           </div>
+       </div>
+   </div>  
+   <div class="col"> 
+       <div class="card">
+           <img class="card-img-top" src="{{ url_for('static',
+                                          filename='img/officers/rganguli.png')
+                                          }}" alt="Hackathon Manager"> 
+           <div class="card-body">
+                <h5 class="card-title">Hackathon Manager</h5> 
+           </div>
+       </div>
+   </div>  
+   <div class="col"> 
+       <div class="card">
+           <img class="card-img-top" src="{{ url_for('static',
+                                          filename='img/officers/csalter2.png')
+                                          }}" alt="System Administrator"> 
+           <div class="card-body">
+                <h5 class="card-title">System Administrator</h5> 
+           </div>
+       </div>
+   </div>  
+    
+</div>
+
+<h4>History</h4>
+<p>ACM established student chapters to provide an opportunity for students to
+play a more active role in the Association and its professional activities. By
+encouraging organization of student chapters on college and university campuses,
+the Association is able to introduce students to the benefits of professional
+organization. These benefits include regular meetings that encourage and enhance
+learning through exchange of ideas among students as well as between established
+professionals and students. Members of a student chapter may also take advantage
+of the activities and services provided by ACM, including the lectureship
+program, student programming and tutorial contests, and the publications
+program. Student chapters provide an obvious setting for the development and
+demonstration of leadership capabilities. Finally, students find the various
+activities of ACM and its student chapters both professionally and socially
+exciting as well as rewarding.</p>
+
+<p>Initially, the ACM organizational structure was based solely on individual
+membership. In 1954, as a result of growth and the wishes of its members,
+chapters were officially formed. These chapters provided a means for people in a
+geographical area with a common interest in computing to exchange ideas and
+sponsor professional activities. Since the recognition of the Dallas-Fort Worth
+Chapter in 1954 as the first ACM chapter, the number of professional chapters
+has grown steadily to over 113 today, and they have become an integral part of
+the ACM organization. Student chapters were authorized by the ACM in 1961; the
+first was chartered at the University of Southwestern Louisiana.</p>
+
+<p>Student chapters provide important services to ACM student members and offer
+a means whereby the ACM can provide scientific information on the industry to
+other members of the college or university community as well as to the general
+public. Moreover, professional chapters and student chapters are focal points
+for feedback from members to the ACM leadership. Finally, ACM Chapters are a
+training ground for the Association’s future leaders. Over one-third of the
+current members of the ACM Council began their volunteer work with ACM as
+officers in the chapter system.</p>
+
+<h4>Other CS Clubs</h4>
+<p>You may also be interested in joining:</p>
+<ul>
+    <li><a href="http://web.cs.wpi.edu/~wics/" target="_blank">Women in Computer
+        Science (WiCS)</a> -- organization for promoting and encouraging women
+    in the field of computer science, open to all students!</li>
+    <li><a href="https://web.cs.wpi.edu/~csc/" target="_blank">Cybersecurity
+            Club</a> -- club for individuals interested in cybersecurity, open to all majors!</li>
+    <li><a href="http://users.wpi.edu/~upe/" target="_blank">Upsilon Pi
+            Epsilon</a> -- The CS honor society</li>
+</ul>
+    
+{% endblock %}
