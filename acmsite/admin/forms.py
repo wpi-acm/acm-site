@@ -10,3 +10,7 @@ class EventForm(FlaskForm):
     start_time = TimeField('Start Time')
     end_day = DateField('End Day', validators=[DataRequired()])
     end_time = TimeField('End Time')
+
+class LinkForm(FlaskForm):
+    slug = StringField("Slug", validators=[DataRequired()])
+    destination = StringField("Destination", validators=[DataRequired()])

@@ -3,9 +3,9 @@ import ulid
 import datetime
 from flask_login import current_user, login_required
 
-from acmsite.models import User, Event
+from acmsite.models import Link, User, Event
 
-from .forms import EventForm
+from .forms import EventForm, LinkForm
 from acmsite import db
 
 
@@ -76,7 +76,9 @@ def delete_event(id):
 @bp.route("/event/<string:id>", methods=["POST"])
 @login_required
 def update_create_event(id):
-
+    if not current_user.is_admin:
+        flash("Unauthorized")
+        return redirect(url_for("dashboard.home"))
 
     name = request.form.get('name')
     description = request.form.get('description')
@@ -114,3 +116,57 @@ def update_create_event(id):
 
 
     return redirect(url_for("admin.events"))
+
+@bp.route("/links")
+@login_required
+def links():
+    if not current_user.is_admin:
+        flash("Unauthorized")
+        return redirect(url_for("dashboard.home"))
+
+    links = Link.query.all()
+    form = LinkForm(request.form)
+
+    return render_template("admin/links.html", links=links, form=form)
+
+@bp.route("/link/<string:id>")
+@login_required
+def link(id):
+    if not current_user.is_admin:
+        return {"status": "error", "message": "Unauthorized"}
+
+    link = Link.query.filter_by(id=id).first()
+
+    if link is None:
+        return {"status": "error", "message": "Invalid ID"}
+
+    return link.create_json()
+
+@bp.route("/link/<string:id>", methods=["POST"])
+@login_required
+def update_create_link(id):
+    if not current_user.is_admin:
+        flash("Unauthorized")
+        return redirect(url_for("dashboard.home"))
+
+    slug = request.form.get('slug')
+    destination = request.form.get('destination')
+
+    if id == '0':
+        # new link
+        l = Link(
+                id=ulid.ulid(),
+                slug=slug,
+                destination=destination)
+        db.session.add(l)
+        db.session.commit()
+    else:
+        l = Link.query.filter_by(id=id).first()
+        if l is None:
+            flash("Invalid ID")
+            return redirect(url_for("admin.links"))
+        l.slug = slug
+        l.destination = destination
+        db.session.commit()
+
+    return redirect(url_for("admin.links"))

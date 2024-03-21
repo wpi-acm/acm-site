@@ -1,0 +1,171 @@
+{% extends 'admin/admin-layout.html' %}
+{% import 'bootstrap5/form.html' as wtf %}
+
+{% block app_content %}
+<h1>ACM Shortlinks</h1>
+<p>Use these to create redirects from the ACM site to other destinations. Make
+sure they don't conflict with existing routes -- avoid the following:</p>
+<ul>
+    <li>/dashboard</li>
+    <li>/admin</li>
+    <li>/static</li>
+    <li>/join</li>
+    <li>/events</li>
+</ul>
+
+<hr>
+<table class="table table-striped">
+   <thead>
+        <tr>
+            <th>Slug</th> 
+            <th>Destination</th>
+            <th><button type="button" class="btn btn-primary"
+                              data-bs-toggle="modal" data-bs-target="#editModal"
+                                                     data-id="0">New</button></th>
+        </tr>
+   </thead> 
+   <tbody>
+        {% for l in links %}
+            <tr>
+                <td>{{ l.slug }}</td>
+                <td>{{ l.destination }}</td>
+                <td>
+                    <div class="dropdown">
+                       <a class="btn btn-primary dropdown-toggle"
+                          data-bs-toggle="dropdown" href="#"><span
+                                                 class="caret"></span></a> 
+                       <ul class="dropdown-menu">
+                          <li class="dropdown-item">
+                                <a href="#editModal" data-bs-toggle="modal"
+                                                     data-id="{{ l.id
+                                                              }}">Edit</a>
+                          </li> 
+                          <li class="dropdown-item">
+                                <a href="#deleteModal" data-bs-toggle="modal"
+                                                       data-id="{{
+                                                                l.id}}">Delete</a>
+                          </li>
+                       </ul>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="modal" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
+                                                aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editModalLabel">Event</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="form" id="edit-form" action="/admin/events/0" role="form" method="post">
+          <div class="modal-body">
+          {{ form.csrf_token }}
+          <div class="form-floating mb-3 required">
+              {{ form.slug(class="form-control") }}
+              {{ form.slug.label() }}
+          </div>
+          <div class="form-floating required">
+              {{ form.destination(class="form-control") }} 
+              {{ form.destination.label() }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="edit-save">Save changes</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="deleteModal" tabindex="-1"
+                                    aria-labelledby="deleteModalLabel"
+                                    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Delete
+                    Event?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                                      data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="delete" data-bs-dismiss="modal" class=" btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/jquery-3.6.3.min.js') }}" charset="utf-8"></script>
+<script charset="utf-8">
+    const deleteButton = document.getElementById("delete")
+    const editButton = document.getElementById("edit-save")
+
+    deleteButton.addEventListener("click", (event) => {
+        button = $(event.relatedTarget)
+        id = deleteButton.dataset.id
+        const deleteRequest = new Request(`/admin/link/${id}/delete`)
+
+        fetch(deleteRequest)
+            .then(async (res) => {
+                    window.alert(await res.text())
+            });
+    });
+
+    $('#deleteModal').on('show.bs.modal', function(event) {
+        var modal = $(this)
+        var button = $(event.relatedTarget)
+        var id = button.data("id")
+
+        // find delete button
+
+        delButton = document.getElementById("delete")
+        delButton.dataset.id = id
+    });
+
+    $('#editModal').on('show.bs.modal', function(event) {
+        var modal = $(this)
+
+        // Zero all fields
+        modal.find('#slug').val('')
+        modal.find('#destination').val('')
+        var button = $(event.relatedTarget)
+        var slug,destination
+        id = button.data('id')
+
+        saveButton = document.getElementById("edit-save")
+        saveButton.dataset.id = id
+
+        editForm = document.getElementById("edit-form")
+        editForm.action = "/admin/link/" + id
+
+        if (id) {
+            $.get(`/admin/link/${id}`, (data) => {
+                console.log(data)
+                if (data.status == "error") {
+                    // This is a new event, do nothing!
+                } else {
+                    slug = data.slug
+                    destination = data.destination
+                }
+
+                modal.find('#slug').val(slug)
+                modal.find('#destination').val(destination)
+            });
+        }
+    });
+
+    $('#deleteModal').on('hidden.bs.modal', function(event) {
+        location.reload()
+    });
+
+    $('#editModal').on('hidden.bs.modal', function(event) {
+        location.reload()
+    });
+</script>
+{% endblock %}

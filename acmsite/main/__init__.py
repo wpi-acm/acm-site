@@ -1,6 +1,6 @@
 import datetime
-from flask import Blueprint, render_template
-from acmsite.models import Event
+from flask import Blueprint, render_template, abort, redirect
+from acmsite.models import Event, Link
 
 bp = Blueprint('main', __name__)
 
@@ -16,3 +16,12 @@ def events():
 @bp.route("/join")
 def join():
     return render_template("join.html")
+
+
+@bp.route("/<string:slug>")
+def shortlink(slug):
+    l = Link.query.filter_by(slug=slug).first()
+    if l is None:
+        abort(404)
+
+    return redirect(l.destination)

@@ -48,3 +48,16 @@ class Event(db.Model):
                 "start_time": self.start_time.isoformat(),
                 "end_time": self.end_time.isoformat(),
                 }
+
+class Link(db.Model):
+    __tablename__ = "acm_links"
+    id = Column(String, primary_key=True)
+    slug = Column(String, nullable=False, unique=True)
+    destination = Column(String, nullable=False)
+
+    def create_json(self):
+        return {
+                "id": self.id,
+                "slug": self.slug,
+                "destination": self.destination
+                }
