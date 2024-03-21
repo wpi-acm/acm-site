@@ -1,6 +1,7 @@
 from flask import flash, redirect, url_for
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, null
+import csv
 from . import db
 from . import login
 
@@ -15,6 +16,15 @@ class User(db.Model, UserMixin):
     last_login = Column(DateTime, nullable=False)
     active = Column(Boolean, nullable=False, default=True)
     is_admin = Column(Boolean, nullable=False, default=False)
+
+def create_acm_csv(user_list):
+    with open('acmsite/tmp/members.csv', 'w') as members_csv:
+        header = ['last', 'first', 'email']
+        writer = csv.DictWriter(members_csv, fieldnames=header)
+
+        for u in user_list:
+            writer.writerow({'last': u.last_name, 'first': u.first_name,
+                             'email': u.email})
 
 @login.user_loader
 def user_loader(user_id):

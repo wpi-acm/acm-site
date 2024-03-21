@@ -1,9 +1,10 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, send_file, url_for
 import ulid
 import datetime
 from flask_login import current_user, login_required
 
 from acmsite.models import Link, User, Event
+from acmsite import models
 
 from .forms import EventForm, LinkForm
 from acmsite import db
@@ -29,6 +30,19 @@ def users():
     user_list = User.query.all()
 
     return render_template("admin/users.html", u_list=user_list)
+
+@bp.route("/users.csv")
+@login_required
+def users_csv():
+    if not current_user.is_admin:
+        flash("Unauthorized")
+        return redirect(url_for('dashboard.home'))
+
+    user_list = User.query.all()
+
+    models.create_acm_csv(user_list)
+
+    return send_file('./tmp/members.csv')
 
 
 @bp.route("/events")
