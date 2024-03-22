@@ -1,6 +1,6 @@
 from flask import flash, redirect, url_for
 from flask_login import UserMixin
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, null
+from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer, String, null
 import csv
 from . import db
 from . import login
@@ -34,6 +34,14 @@ def user_loader(user_id):
 def unauth():
     flash("Please log in first!")
     return redirect("/")
+
+class Officer(db.Model):
+    __tablename__ = "acm_officers"
+    id = Column(String, primary_key=True)
+    user_id = Column(String, ForeignKey('acm_users.id'), nullable=False)
+    term_start = Column(Date, nullable=False)
+    term_end = Column(Date, nullable=True)
+    position = Column(String, nullable=False)
 
 class PwResetRequest(db.Model):
     id = Column(String, primary_key=True)
