@@ -44,11 +44,6 @@ def create_app():
 
     from .models import User
     
-    # Ensure that uploads directory exists
-    try:
-        os.mkdir(app.config["UPLOAD_FOLDER"]) 
-    except FileExistsError:
-        pass
 
     from .main import bp as main_bp
     app.register_blueprint(main_bp)
