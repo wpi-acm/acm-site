@@ -46,7 +46,7 @@ def create_app():
     
     # Ensure that uploads directory exists
     try:
-        os.mkdir("acmsite/" + app.config["UPLOAD_FOLDER"]) 
+        os.mkdir(app.config["UPLOAD_FOLDER"]) 
     except FileExistsError:
         pass
 
