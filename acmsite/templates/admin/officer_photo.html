@@ -25,8 +25,6 @@
 		</div>
 		<!-- save btn -->
 		<button class="btn save hide">Save</button>
-		<!-- download btn -->
-		<a href="" class="btn download hide">Download</a>
 	</div>
 <script src="{{ url_for('static', filename='js/jquery-3.6.3.min.js') }}" charset="utf-8"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
@@ -40,7 +38,6 @@ img_h = document.querySelector('.img-h'),
 options = document.querySelector('.options'),
 save = document.querySelector('.save'),
 cropped = document.querySelector('.cropped'),
-dwn = document.querySelector('.download'),
 upload = document.querySelector('#file-input'),
 cropper = '';
 
@@ -95,9 +92,6 @@ save.addEventListener('click', e => {
         window.location = `/admin/officer/${user_id}`
     }
     });
-  dwn.classList.remove('hide');
-  dwn.download = 'imagename.png';
-  dwn.setAttribute('href', imgSrc);
 });
 </script>
 {% endblock %}
