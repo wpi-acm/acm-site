@@ -13,67 +13,72 @@ very friendly. You can find a list of our events and meetings <a href="{{
                                                                        }}">here</a>.</p>
 
 <h4>Exec Board</h4>
-<!-- TODO: Make this dynamic -- create officers table? <22-03-24, Cara> -->
 <div class="row">
    <div class="col"> 
-       <div class="card">
-           <img class="card-img-top" src="{{ url_for('static',
-                                          filename='img/officers/avenat.png')
+       <div class="card" id="president">
+           <img class="card-img-top" id="President-img"src="{{ url_for('static',
+                                          filename='img/officers/placeholder.png')
                                           }}" alt="President"> 
            <div class="card-body">
                 <h5 class="card-title">President</h5> 
+                <p class="card-text" id="President-name">Unavailable</p>
            </div>
        </div>
    </div> 
    <div class="col"> 
-       <div class="card">
-           <img class="card-img-top" src="{{ url_for('static',
-                                          filename='img/officers/nitty.png')
+       <div class="card" id="vice-president">
+           <img class="card-img-top" id="Vice President-img" src="{{ url_for('static',
+                                          filename='img/officers/placeholder.png')
                                           }}" alt="Vice President"> 
            <div class="card-body">
                 <h5 class="card-title">Vice President</h5> 
+                <p class="card-text" id="Vice President-name">Unavailable</p>
            </div>
        </div>
    </div> 
    <div class="col"> 
-       <div class="card">
-           <img class="card-img-top" src="{{ url_for('static',
-                                          filename='img/officers/ajhenbest.png')
+       <div class="card" id="treasurer">
+           <img class="card-img-top" id="Treasurer-img" src="{{ url_for('static',
+                                          filename='img/officers/placeholder.png')
                                           }}" alt="Treasurer"> 
            <div class="card-body">
                 <h5 class="card-title">Treasurer</h5> 
+                <p class="card-text" id="Treasurer-name">Unavailable</p>
            </div>
        </div>
    </div> 
 </div>
 <div class="row">
    <div class="col"> 
-       <div class="card">
-           <img class="card-img-top" src="{{ url_for('static',
-                                          filename='img/officers/gdshiu.png')
+       <div class="card" id="secretary">
+           <img class="card-img-top" id="Secretary-img" src="{{ url_for('static',
+                                          filename='img/officers/placeholder.png')
                                           }}" alt="Secretary"> 
            <div class="card-body">
                 <h5 class="card-title">Secretary</h5> 
+                <p class="card-text" id="Secretary-name">Unavailable</p>
            </div>
        </div>
    </div> 
    <div class="col"> 
-       <div class="card">
-           <img class="card-img-top" src="{{ url_for('static',
-                                          filename='img/officers/gcampbell2.png')
+       <div class="card" id="pr-chair">
+           <img class="card-img-top" id="PR Chair-img" src="{{ url_for('static',
+                                          filename='img/officers/placeholder.png')
                                           }}" alt="PR Chair"> 
            <div class="card-body">
                 <h5 class="card-title">PR Chair</h5> 
+                <p class="card-text" id="PR Chair-name">Unavailable</p>
            </div>
        </div>
    </div> 
    <div class="col"> 
-       <div class="card">
-           <img class="card-img-top" src="{{ url_for('static',
-                                          filename='img/officers/mdidenko.png')
+       <div class="card" id="events-coordinator">
+           <img class="card-img-top" id="Events Coordinator-img" src="{{ url_for('static',
+                                          filename='img/officers/placeholder.png')
                                           }}" alt="Events Coordinator"> 
            <div class="card-body">
                 <h5 class="card-title">Events Coordinator</h5> 
+                <p class="card-text" id="Events Coordinator-name">Unavailable</p>
            </div>
        </div>
    </div>  
@@ -81,32 +86,35 @@ very friendly. You can find a list of our events and meetings <a href="{{
 
 <div class="row">
    <div class="col"> 
-       <div class="card">
-           <img class="card-img-top" src="{{ url_for('static',
-                                          filename='img/officers/djreynolds1.png')
+       <div class="card" id="hackathon-manager-1">
+           <img class="card-img-top" id="Hackathon Manager 1-img" src="{{ url_for('static',
+                                          filename='img/officers/placeholder.png')
                                           }}" alt="Hackathon Manager"> 
            <div class="card-body">
                 <h5 class="card-title">Hackathon Manager</h5> 
+                <p class="card-text" id="Hackathon Manager 1-name">Unavailable</p>
            </div>
        </div>
    </div>  
    <div class="col"> 
-       <div class="card">
-           <img class="card-img-top" src="{{ url_for('static',
-                                          filename='img/officers/rganguli.png')
+       <div class="card" id="hackathon-manager-2">
+           <img class="card-img-top" id="Hackathon Manager 2-img" src="{{ url_for('static',
+                                          filename='img/officers/placeholder.png')
                                           }}" alt="Hackathon Manager"> 
            <div class="card-body">
                 <h5 class="card-title">Hackathon Manager</h5> 
+                <p class="card-text" id="Hackathon Manager 2-name">Unavailable</p>
            </div>
        </div>
    </div>  
    <div class="col"> 
-       <div class="card">
-           <img class="card-img-top" src="{{ url_for('static',
-                                          filename='img/officers/csalter2.png')
+       <div class="card" id="system-administrator">
+           <img class="card-img-top" id="System Administrator-img" src="{{ url_for('static',
+                                          filename='img/officers/placeholder.png')
                                           }}" alt="System Administrator"> 
            <div class="card-body">
                 <h5 class="card-title">System Administrator</h5> 
+                <p class="card-text" id="System Administrator-name">Unavailable</p>
            </div>
        </div>
    </div>  
@@ -162,4 +170,27 @@ officers in the chapter system.</p>
             Epsilon</a> -- The CS honor society</li>
 </ul>
     
+<script charset="utf-8">
+   pres = document.querySelector("#president")
+   vp = document.querySelector("#vice-president")
+   sec = document.querySelector("#secretary")
+   tres = document.querySelector("#treasurer")
+   hm1 = document.querySelector("#hackathon-manager-1")
+   hm2 = document.querySelector("#hackathon-manager-2")
+   pr = document.querySelector("#pr-chair")
+   sys = document.querySelector("#system-administrator")
+   ec = document.querySelector("#events-coordinator")
+    
+    officers = new Request("/api/officers/current")
+    fetch(officers).then(async (res) => {
+        data = await res.json()
+        console.log(data)
+
+        for (var i = 0; i < data.length; i++) {
+            let title = data[i]["position"]
+            document.getElementById(title + "-name").innerHTML = data[i]["name"]
+            document.getElementById(title + "-img").src = data[i]["img"]
+        }
+    });
+</script>
 {% endblock %}

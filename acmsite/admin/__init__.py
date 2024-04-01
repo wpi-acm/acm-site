@@ -288,7 +288,7 @@ def upload_photo_post():
     if not current_user.is_admin:
         return error_json("Unauthorized")    
 
-    img_path = os.path.join(current_app.config["UPLOAD_FOLDER"], f"{current_user.username()}.png")
+    img_path = os.path.join("acmsite/" + current_app.config["UPLOAD_FOLDER"], f"{current_user.username()}.png")
     b64_string = request.data.decode()
     b64_string += '=' * (len(b64_string) % 4)
 
