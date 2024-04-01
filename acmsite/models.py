@@ -17,6 +17,9 @@ class User(db.Model, UserMixin):
     active = Column(Boolean, nullable=False, default=True)
     is_admin = Column(Boolean, nullable=False, default=False)
 
+    def username(self):
+        return self.email.split("@")[0]
+
 def create_acm_csv(user_list):
     with open('acmsite/tmp/members.csv', 'w') as members_csv:
         header = ['last', 'first', 'email']
@@ -42,6 +45,15 @@ class Officer(db.Model):
     term_start = Column(Date, nullable=False)
     term_end = Column(Date, nullable=True)
     position = Column(String, nullable=False)
+
+    def create_json(self):
+        return {
+                "id": self.id,
+                "user_id": self.user_id,
+                "term_start": self.term_start,
+                "term_end": self.term_end,
+                "position": self.position
+                }
 
 class PwResetRequest(db.Model):
     id = Column(String, primary_key=True)

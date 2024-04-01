@@ -29,10 +29,14 @@
                                    class="caret"></span></a>
                        <ul class="dropdown-menu">
                            {% if u.is_admin %}
-                           <li class="dropdown-item">Demote Officer</li>                           
+                           <li class="dropdown-item">Demote Officer</li>
                            {% else %}
                            <li class="dropdown-item">Promote Officer</li>
                            {% endif %}
+                           <li class="dropdown-item"><a href="{{
+                                                    url_for('admin.officer_positions',
+                                                    user_id=u.id)}}">Manage Officer
+                                                    Entries</a></li>
                            <li class="dropdown-item">View Event Checkins</li>
                            <li class="dropdown-item">Delete Member</li>
                        </ul>
@@ -40,7 +44,7 @@
                 </td>
             </tr>
         {% endfor %}
-    </tbody>
-    
+    </tbody>    
 </table>
+
 {% endblock app_content %}

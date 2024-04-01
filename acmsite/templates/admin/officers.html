@@ -1,0 +1,173 @@
+{% extends "admin/admin-layout.html" %}
+
+{% block app_content %}
+
+<h1>Officer Positions for {{ current_user.first_name}} {{ current_user.last_name
+    }}</h1>
+<p>Update Photo: <a href="{{ url_for('admin.upload_photo')
+    }}">Here</a>
+<table class="table table-striped">
+   <thead>
+        <tr>
+            <th>Position</th>
+            <th>Term Start</th>
+            <th>Term End</th>
+            <th><button type="button" class="btn btn-primary"
+                              data-bs-toggle="modal"
+                                              data-bs-target="#officerModal"
+                                              data-id="0" data-user-id="{{
+                                                                        user_id
+                                                                        }}">New</button></th>
+        </tr>
+   </thead> 
+   <tbody>
+        {% for o in position_list %}
+            <tr>
+                <td>{{ o.position }}</td>
+                <td>{{ o.term_start }}</td>
+                <td>{{ o.term_end }}</td>
+                <td>
+                    <div class="dropdown">
+                       <a class="btn btn-primary dropdown-toggle"
+                           data-bs-toggle="dropdown" href="#"><span
+                                                     class="caret"></span></a> 
+                       <ul class="dropdown-menu">
+                          <li class="dropdown-item"><a href="#officerModal"
+                                                       data-bs-toggle="modal"
+                                                         data-id="{{
+                                                                   o.id}}"
+                                                         data-user-id="{{
+                                                                       user_id
+                                                                       }}">Edit</a></li> 
+                      </ul>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+   </tbody>
+</table>
+<!-- Modals -->
+<div class="modal" id="officerModal" tabindex="-1"
+            aria-labelledby="officerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h1 class="modal-title fs-5" id="officerModalLabel">Update Officer</h1> 
+             <button class="btn-close" type="button" data-bs-dismiss="modal"
+                 aria-label="Close"></button>
+          </div> 
+          <form class="form" id="officer-form" action="/admin/officers/0"
+              method="post" autocomplete="off">
+             <div class="modal-body">
+                 {{ form.csrf_token}}
+                 <div class="form-floating mb-3 required">
+                     {{ form.position(class="form-control") }}
+                     {{ form.position.label() }}
+                 </div>
+                 <div class="row">
+                    <div class="col">
+                       <div class="form-floating mb-3 required">
+                           {{ form.term_start(class="form-control") }}
+                           {{ form.term_start.label() }}
+                       </div> 
+                    </div> 
+                    <div class="col">
+                       <div class="form-floating mb-3 required">
+                           {{ form.term_end(class="form-control") }}
+                           {{ form.term_end.label() }}
+                       </div> 
+                    </div>
+                 </div>
+             </div> 
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                                      data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary"
+                                      id="edit-save">Submit</button>
+             </div>
+          </form>
+       </div> 
+    </div>    
+</div>
+
+<div class="modal" id="photoModal" tabindex="-1"
+                                   aria-labelledby="photoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+       <div class="modal-header">
+           <h1 class="modal-title fs-5" id="photoModalLabel">Upload New
+               Photo</h1> 
+           <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                                   aria-label="Close"></button>
+       </div> 
+       <div class="modal-body">
+           <div class="form-floating mb-3 required">
+               <input type="file" id="file-input">
+            </div>
+                <div id="result"></div>
+            	<div class="box-2 img-result hide" id="img-result">
+                </div>
+		<!-- result of crop -->
+		<img class="cropped" src="" alt="">
+        <button type="button" id="photo-save">Save</button>
+	</div>
+       </div>
+       </div>
+    </div>
+    
+</div>
+
+<script src="{{ url_for('static', filename='js/jquery-3.6.3.min.js') }}" charset="utf-8"></script>
+<!-- Normalize CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<!-- Cropper CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
+<!-- Cropper JS -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
+<script charset="utf-8">
+    $('#officerModal').on('show.bs.modal', function(event) {
+        var modal = $(this)
+
+        // Zero all fields
+        modal.find('#position').val('')
+        modal.find('#term_start').val('')
+        modal.find('#term_end').val('')
+
+        // Get related ID of the officer position
+        var button = $(event.relatedTarget)
+        var position,term_start,term_end
+        id = button.data('id')
+
+        user_id = button.data('user-id')
+
+        saveButton = document.getElementById("edit-save")
+        saveButton.dataset.id = id
+
+        editForm = document.getElementById("officer-form")
+
+        $.get(`/admin/officer/get/${id}`, (data) => {
+            console.log(data)
+            if (data.status == "error") {
+                // new officer, do nothing
+                editForm.action = "/admin/officer/new/" + user_id
+            } else {
+                editForm.action = "/admin/officer/update/" + user_id + "/" + id
+                position = data.position
+                start = new Date(data.term_start)
+                end = new Date(data.term_end)
+                var day = ("0" + start.getDate()).slice(-2);
+                var month = ("0" + (start.getMonth() + 1)).slice(-2);
+
+                term_start = start.getFullYear()+"-"+(month)+"-"+(day)
+                var day = ("0" + end.getDate()).slice(-2);
+                var month = ("0" + (end.getMonth() + 1)).slice(-2);
+                term_end = end.getFullYear()+"-"+(month)+"-"+(day)
+            }
+
+            modal.find('#position').val(position)
+            modal.find('#term_start').val(term_start)
+            modal.find('#term_end').val(term_end)
+        })
+    });
+</script>
+{% endblock %}
