@@ -34,7 +34,7 @@ def current_officers():
             continue # Broken reference, continue
         img = url_for('static', filename="img/officers/placeholder.png")
         if exists(f"acmsite/{current_app.config['UPLOAD_FOLDER']}/{u.username()}.png"):
-            img = url_for("main.officer_images", username="f{u.username()}.png")
+            img = url_for("main.officer_images", username=f"{u.username()}.png")
         officers_complete.append({
                 "id": o.id,
                 "position": o.position,
