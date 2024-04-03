@@ -23,8 +23,6 @@ def join():
 
 @bp.route("/officers/<path:username>")
 def officer_images(username):
-    print(current_app.config["UPLOAD_FOLDER"])
-    print(username)
     return send_from_directory(current_app.config["UPLOAD_FOLDER"], username)
 
 
