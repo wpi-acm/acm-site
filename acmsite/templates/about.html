@@ -7,12 +7,13 @@
 <h4>tl;dr</h4>
 <p>We are a group of computer science enthusiasts that hosts computer science
 related events like programming competitions and workshops, and more casual
-events as well! If you’re interested in joining, stop by our meetings! We are
-very friendly. You can find a list of our events and meetings <a href="{{
+events as well! If you’re interested in joining, stop by our meetings! We're
+very friendly. You can find a list of our upcoming events and meetings <a href="{{
                                                                        url_for('main.events')
                                                                        }}">here</a>.</p>
 
 <h4>Exec Board</h4>
+<p><em>To contact our exec board, shoot us an email at acm [at] wpi.edu!</em></p>
 <div class="row">
    <div class="col"> 
        <div class="card" id="president">
@@ -121,20 +122,21 @@ very friendly. You can find a list of our events and meetings <a href="{{
     
 </div>
 
-<h4>History</h4>
-<p>ACM established student chapters to provide an opportunity for students to
-play a more active role in the Association and its professional activities. By
-encouraging organization of student chapters on college and university campuses,
-the Association is able to introduce students to the benefits of professional
-organization. These benefits include regular meetings that encourage and enhance
-learning through exchange of ideas among students as well as between established
-professionals and students. Members of a student chapter may also take advantage
-of the activities and services provided by ACM, including the lectureship
-program, student programming and tutorial contests, and the publications
-program. Student chapters provide an obvious setting for the development and
-demonstration of leadership capabilities. Finally, students find the various
-activities of ACM and its student chapters both professionally and socially
-exciting as well as rewarding.</p>
+<h4 class="mt-3">History</h4>
+<p>The Association for Computing Machinery (ACM) established student chapters to
+provide an opportunity for students to play a more active role in the
+Association and its professional activities. By encouraging organization of
+student chapters on college and university campuses, the Association is able to
+introduce students to the benefits of professional organization. These benefits
+include regular meetings that encourage and enhance learning through exchange of
+ideas among students as well as between established professionals and students.
+Members of a student chapter may also take advantage of the activities and
+services provided by ACM, including the lectureship program, student programming
+and tutorial contests, and the publications program. Student chapters provide an
+obvious setting for the development and demonstration of leadership
+capabilities. Finally, students find the various activities of ACM and its
+student chapters both professionally and socially exciting as well as
+rewarding.</p>
 
 <p>Initially, the ACM organizational structure was based solely on individual
 membership. In 1954, as a result of growth and the wishes of its members,
@@ -184,7 +186,9 @@ officers in the chapter system.</p>
     officers = new Request("/api/officers/current")
     fetch(officers).then(async (res) => {
         data = await res.json()
+        {% if config["DEBUG"] %}
         console.log(data)
+        {% endif %}
 
         for (var i = 0; i < data.length; i++) {
             let title = data[i]["position"]
