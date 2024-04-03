@@ -51,6 +51,7 @@ def toggle_admin(user_id):
 
     u.is_admin = not u.is_admin
     db.session.commit()
+    current_app.logger.info(f"{current_user.email} toggled admin status for {u.email}")
     return success_json()
 
 @bp.route("/users.csv")
@@ -138,6 +139,7 @@ def update_create_event(id):
                 end_time=end)
         db.session.add(e)
         db.session.commit()
+        current_app.logger.info(f"{current_user} is creating a new event: {e.name}")
     else:
         e = Event.query.filter_by(id=id).first()
         if e is None:
@@ -148,6 +150,7 @@ def update_create_event(id):
         e.start_time = start
         e.end_time = end
         db.session.commit()
+        current_app.logger.info(f"{current_user} is updating an existing event: {e.name}")
 
 
     return redirect(url_for("admin.events"))
