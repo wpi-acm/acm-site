@@ -39,6 +39,20 @@ def users():
     return render_template("admin/users.html", u_list=user_list,
                            form=position_form)
 
+@bp.route("/users/toggle_admin/<string:user_id>")
+@login_required
+def toggle_admin(user_id):
+    if not current_user.is_admin:
+        return error_json("Unauthorized")
+
+    u = User.query.filter_by(id=user_id).first()
+    if u is None:
+        return error_json("Invalid user")
+
+    u.is_admin = not u.is_admin
+    db.session.commit()
+    return success_json()
+
 @bp.route("/users.csv")
 @login_required
 def users_csv():

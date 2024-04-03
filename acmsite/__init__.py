@@ -35,7 +35,7 @@ def create_app():
     tenant = app.config["AZURE_TENANT_ID"]
     AZURE_CLIENT_ID = app.config["AZURE_CLIENT_ID"]
     oauth.register(
-            name='azure',
+            name="azure",
             authorize_url=f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize",
             access_token_url=f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
             api_base_url="https://graph.microsoft.com/v1.0/",

@@ -29,9 +29,13 @@
                                    class="caret"></span></a>
                        <ul class="dropdown-menu">
                            {% if u.is_admin %}
-                           <li class="dropdown-item">Demote Officer</li>
+                           <li class="dropdown-item"><a href="#" class="toggle-admin" data-id="{{
+                                                                           u.id}}
+                                                                           ">Demote
+                                                                           Officer</a></li>
                            {% else %}
-                           <li class="dropdown-item">Promote Officer</li>
+                           <li class="dropdown-item"> <a class="toggle-admin"
+                                      href="#" data-id="{{ u.id}}">Promote Officer</a></li>
                            {% endif %}
                            <li class="dropdown-item"><a href="{{
                                                     url_for('admin.officer_positions',
@@ -46,5 +50,24 @@
         {% endfor %}
     </tbody>    
 </table>
+<script src="{{ url_for('static', filename='js/jquery-3.6.3.min.js') }}" charset="utf-8"></script>
+<script charset="utf-8">
+    $(document).ready(() => {
+        $('a.toggle-admin').click((e) => {
+            e.preventDefault();
+            let id = e.target.dataset.id
+            console.log(`Toggling admin status of ${id}`)
+            $.get(`/admin/users/toggle_admin/${id}`, (data) => {
+                if (data.status === 'success') {
+                    window.alert("Success!");
+                    window.location.reload()
+                } else {
+                    window.alert(`Error :(\n${data.message}`)
+                    window.location.reload()
+                }
+            });
+        });
+    });
+</script>
 
 {% endblock app_content %}
