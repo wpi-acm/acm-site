@@ -27,10 +27,11 @@ def oauth2_callback():
     resp.raise_for_status()
     profile = resp.json()
     print(profile)
-    u = User.query.filter_by(email=profile['mail']).first()
+    u = User.query.filter_by(microsoft_id=profile['id']).first()
     if u is None:
         u = User(
             id=ulid.ulid(),
+            microsoft_id=profile['id'],
             password='',
             email=profile['mail'],
             first_name=profile['givenName'],

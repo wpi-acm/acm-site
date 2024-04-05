@@ -8,6 +8,7 @@ from . import login
 class User(db.Model, UserMixin):
     __tablename__ = "acm_users"
     id = Column(String, primary_key=True)
+    microsoft_id = Column(String, unique=True, nullable=False)
     email = Column(String, unique=True, nullable=True)
     password = Column(String, nullable=False)
     first_name = Column(String, nullable=False)
