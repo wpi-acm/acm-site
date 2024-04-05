@@ -224,10 +224,14 @@ def officer_positions(user_id):
 
     form = OfficerForm(request.form)
 
+    u = User.query.filter_by(id=user_id).first()
+    if u is None:
+        flash("Invalid user")
+        return redirect(url_for("admin.users"))
     position_list = Officer.query.filter_by(user_id=user_id).order_by(Officer.term_end).all()
 
     return render_template("admin/officers.html", form=form,
-                           position_list=position_list, user_id=user_id)
+                           position_list=position_list, user_id=user_id, user=u)
 
 @bp.route("/officer/get/<string:pos_id>")
 @login_required

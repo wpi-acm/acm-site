@@ -2,8 +2,7 @@
 
 {% block app_content %}
 
-<h1>Officer Positions for {{ current_user.first_name}} {{ current_user.last_name
-    }}</h1>
+<h1>Officer Positions for {{ user.first_name}} {{ user.last_name }}</h1>
 <p>Update Photo: <a href="{{ url_for('admin.upload_photo')
     }}">Here</a>
 <table class="table table-striped">
