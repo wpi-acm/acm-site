@@ -2,7 +2,13 @@
 
 {% block app_content %}
 <h1>Member List</h1> 
+<div>
 <a href="{{ url_for('admin.users_csv') }}" target="_blank">CSV for ACM</a>
+</div>
+<div class="mt-2">
+<label for="search">Search</label>
+<input type="text" id="search" class="form-control w-25"/>
+</div>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -14,7 +20,7 @@
             <th>Options</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="searchable">
         {% for u in u_list %}
             <tr>
                 <td>{{ u.email }}</td>
@@ -51,6 +57,7 @@
     </tbody>    
 </table>
 <script src="{{ url_for('static', filename='js/jquery-3.6.3.min.js') }}" charset="utf-8"></script>
+<script src="{{ url_for('static', filename='js/tableutils.js') }}"></script>
 <script charset="utf-8">
     $(document).ready(() => {
         $('a.toggle-admin').click((e) => {
