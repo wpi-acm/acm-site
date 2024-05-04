@@ -13,4 +13,46 @@
                                                           unless you're an
                                                           officer!</p>
     
+<button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                  data-bs-target="#passwordModal">Change or Set
+                                  Local Password</button>
+<!-- Modals -->
+<div class="modal" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel"
+                                                aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="passwordModalLabel">Change Password</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="form" id="edit-form" action="/dashboard/change_password" role="form" method="post">
+          <div class="modal-body">
+          {{ form.csrf_token }}
+            <div class="form-floating mb-3 required">
+                {{ form.current_password(class="form-control") }}
+                {{ form.current_password.label() }}
+            </div>
+           <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3 required">
+                        {{ form.new_password(class="form-control") }}
+                        {{ form.new_password.label() }}
+                    </div> 
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3 required">
+                        {{ form.password_confirm(class="form-control") }}
+                        {{ form.password_confirm.label() }}
+                    </div>                    
+                </div> 
+            </div> 
+         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="edit-save">Save changes</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock app_content %}

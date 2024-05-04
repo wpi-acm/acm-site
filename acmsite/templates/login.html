@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block app_content %}
+<h1>Login Methods</h1>
+
+<div>
+<a class="btn btn-primary" href="{{ url_for('auth.oauth_redirect') }}">Login with WPI</a>
+</div>
+<div class="mt-1 mb-3">
+<a class="btn btn-secondary" href="">Login with Local Account</a>
+</div>
+{% endblock app_content %}
