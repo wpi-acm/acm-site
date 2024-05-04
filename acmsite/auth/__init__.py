@@ -10,9 +10,12 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 from acmsite import oauth
 
-
-@bp.route('/login')
+@bp.route("/login")
 def login():
+    return render_template('login.html')
+
+@bp.route('/oauth')
+def oauth_redirect():
     return oauth.azure.authorize_redirect(url_for('auth.oauth2_callback',
                                                   _external=True))
 
