@@ -8,7 +8,7 @@ from io import BytesIO
 from PIL import Image
 import base64
 
-from acmsite.models import Link, Officer, User, Event
+from acmsite.models import EventCheckin, Link, Officer, User, Event
 from acmsite import models
 
 from .forms import EventForm, LinkForm, OfficerForm
@@ -154,6 +154,28 @@ def update_create_event(id):
 
 
     return redirect(url_for("admin.events"))
+
+@bp.route("/event/<string:id>/checkins")
+@login_required
+def event_checkins(id):
+    if not current_user.is_admin:
+        flash("Unauthorized")
+        return redirect(url_for("dashboard.home"))
+
+    event = db.session.execute(db.select(Event).where(Event.id == id)).scalar_one_or_none()
+    if event is None:
+        flash("Invalid event")
+        return redirect(url_for("admin.events"))
+    checkins = db.session.execute(db.select(EventCheckin).where(EventCheckin.event ==
+                                                     id).join(User)).scalars() 
+
+    processed_checkins = []
+    for c in checkins:
+        user = db.session.execute(db.select(User).where(User.id == c.user)).scalar_one_or_none()
+        processed_checkins.append({"name": f"{user.first_name} {user.last_name}", "email": user.email})
+
+
+    return render_template("admin/checkins.html", checkins=processed_checkins,e=event)
 
 @bp.route("/links")
 @login_required

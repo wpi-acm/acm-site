@@ -1,0 +1,35 @@
+{% extends "admin/admin-layout.html" %}
+{% import "bootstrap5/form.html" as wtf %}
+
+{% block app_content %}
+<h1>Checkins for `{{ e.name }}`</h1> 
+
+
+{% for c in checkins %}
+    {{ c.__dict__ }}
+{% endfor %}
+
+<table class="table table-striped">
+    <thead>
+       <tr>
+            <th>Name</th>
+            <th>Email</th>
+       </tr> 
+    </thead>
+    <tbody>
+        {% for c in checkins %}
+        <tr>
+            <td>{{ c.name }}</td>
+            <td>{{ c.email }}</td>
+        </tr>
+        {% endfor %}
+    </tbody> 
+</table>
+
+<h3>Copy-pastable list for CampusGroups</h3>
+{% for c in checkins %}
+{{ c.email }},
+{% endfor %}
+
+
+{% endblock %}

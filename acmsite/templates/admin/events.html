@@ -40,6 +40,11 @@
                             <li class="dropdown-item">
                                 <a href="#deleteModal"
                                    data-bs-toggle="modal" data-id="{{ e.id }}">Delete Event</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="{{ url_for('admin.event_checkins',
+                                         id=e.id) }}">Event Checkins</a>
+                            </li>
                         </ul>
                     </div>
                 </td>
