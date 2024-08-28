@@ -4,6 +4,18 @@
 
 <h1>Welcome back, {{ current_user.first_name }}!</h1>
 
+{% if events %}
+
+<p>The following events are available for check-in:</p>
+{% for e in events %}
+<a href="{{ url_for('dashboard.checkin', event_id=e.id) }}">{{ e.name }}</a>
+{% endfor %}
+{% else %}
+<p>There are no events available for check-in.</p>
+{% endif %}
+
+<hr/>
+
 <p>For a list of upcoming events, take a look at our <a href="{{
                                                               url_for('main.events')
                                                               }}">events

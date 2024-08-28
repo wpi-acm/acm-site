@@ -80,6 +80,12 @@ class Event(db.Model):
                 "end_time": self.end_time.isoformat(),
                 }
 
+class EventCheckin(db.Model):
+    __tablename__ = "acm_checkins"
+    id = Column(String, primary_key=True)
+    user = Column(String, ForeignKey("acm_users.id"), nullable=False)
+    event = Column(String, ForeignKey("acm_events.id"), nullable=False)
+
 class Link(db.Model):
     __tablename__ = "acm_links"
     id = Column(String, primary_key=True)
