@@ -17,7 +17,8 @@ class LinkForm(FlaskForm):
 
 class OfficerForm(FlaskForm):
     position = SelectField("Position", choices=["President", "Vice President",
-                                                "Treasurer", "Secretary", "PR Chair", "Hackathon Manager 1",
+                                                "Treasurer", "Secretary", "PR Chair", 
+                                                "Event Coordinator", "Hackathon Manager 1",
                                                 "Hackathon Manager 2", "System Administrator"],
                            validators=[DataRequired()])
     term_start = DateField("Term Start", validators=[DataRequired()])
