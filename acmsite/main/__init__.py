@@ -6,16 +6,24 @@ bp = Blueprint('main', __name__)
 
 @bp.route("/")
 def homepage():
-    return render_template("index.html")
+    return render_template("main/index.html")
 
 @bp.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("main/about.html")
+
+@bp.route("/officers")
+def officers():
+    return render_template("main/officers.html")
+
+@bp.route("/what-we-do")
+def activities():
+    return render_template("main/how_we_help.html")
 
 @bp.route("/events")
 def events():
     events = Event.query.filter(Event.start_time > datetime.datetime.now()).all()
-    return render_template("events.html", events=events)
+    return render_template("main/events.html", events=events)
 
 @bp.route("/join")
 def join():

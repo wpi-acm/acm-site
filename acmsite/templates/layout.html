@@ -28,7 +28,16 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
-                {{ render_nav_item('main.about', 'About')}}
+                <li class="navbar-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        About
+                    </a>
+                    <ul class="dropdown-menu">
+                        {{ render_nav_item('main.about', 'Summary') }}
+                        {{ render_nav_item('main.officers', 'Exec Board') }}
+                        {{ render_nav_item('main.activities', 'What We Do') }}
+                    </ul>
+                </li>
                 {{ render_nav_item('main.events', 'Events')}}
                 {{ render_nav_item('main.join', 'Join Us!')}}
             </ul>

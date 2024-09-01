@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block app_content %}
+
+<h1>About ACM</h1>
+
+<h4>tl;dr</h4>
+<p>We are a group of computing enthusiasts that host events like programming and
+Linux workshops, as well as social events for the CS department and the
+university as a whole.</p>
+
+<h4 class="mt-3">History</h4>
+<p>WPI's ACM chapter was founded in 1997 as a student chapter of the
+international Association for Computing Machinery. At that time, we had a lounge
+in the Fuller Labs subbasement called the "Sin Lab". This room hosted our
+physical machines available to all members, including NFS storage, email, and a
+web server. Over time, that room was taken for lab space by the department, and
+ACM's machines moved into the department's server room. In 2013, the chapter
+purchased the hypervisor that would continue on as other machines were
+decommissioned.</p>
+
+<p>Currently, ACM hosts a number of <a href="{{ url_for('main.events')
+                                             }}">workshops and social events</a> throughout the
+                                         academic year, as well as the <a
+                                             href="https://hack.wpi.edu"
+                                             target="_blank">annual
+                                             hackathon</a> every C term.</p>
+<h4>Other CS Clubs</h4>
+<p>You may also be interested in joining:</p>
+<ul>
+    <li><a href="https://mywpi.wpi.edu/wics/home/" target="_blank">Women in Computer
+        Science (WiCS)</a> -- a student group that aims to foster a community
+    for students who support the advancement of women in computer science and
+    related fields at WPI</li>
+    <li><a href="http://mywpi.wpi.edu/WiCyS/club_signup" target="_blank">Women in Cybersecurity</a>
+    -- WPI's Women in Cybersecurity club is a supportive hub for women in the field, offering practical workshops, networking opportunities, and mentorship programs where everyone is welcome no matter identity or skill level. With a focus on skill-building and professional development, the club strives to foster diversity and inclusion within the cybersecurity department at WPI</li>
+    <li><a href="https://web.cs.wpi.edu/~csc/" target="_blank">Cybersecurity
+            Club</a> -- The Cyber Security Club at the Worcester Polytechnic Institute aims to educate those interested in cyber security and to facilitate an informative environment where students from all educational levels and backgrounds can master safe practices. The club hosts cyber labs and competitions locally and nationally where members can practice what they have learned. Members are not required to attend these competitions, but they are encouraged to continue learning</li>
+    <li><a href="http://users.wpi.edu/~upe/" target="_blank">Upsilon Pi
+            Epsilon</a> -- The CS honor society</li>
+</ul>
+    
+{% endblock %}
